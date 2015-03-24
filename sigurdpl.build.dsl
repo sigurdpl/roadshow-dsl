@@ -1,6 +1,7 @@
-job("${GITHUB_USER}.roadshow.generated.build") {
+username = "sigurdpl"
+job("${username}.roadshow.generated.build") {
     scm {
-        git("git@github.com:${GITHUB_USER}/roadshow.git", "master")
+        git("git@github.com:${username}/roadshow.git", "master")
     }
     triggers {
         scm('* * * * *')
@@ -13,13 +14,13 @@ job("${GITHUB_USER}.roadshow.generated.build") {
       	jacocoCodeCoverage()
       	archiveJunit('build/test-results/*.xml')
       	warnings(['Java Compiler (javac)'])
-    	downstream("${GITHUB_USER}.roadshow.generated.staticanalysis", 'SUCCESS')
+    	downstream("${username}.roadshow.generated.staticanalysis", 'SUCCESS')
     }
 }
 
-job("${GITHUB_USER}.roadshow.generated.staticanalysis") {
+job("${username}.roadshow.generated.staticanalysis") {
     scm {
-        git("git@github.com:${GITHUB_USER}/roadshow.git", "master")
+        git("git@github.com:${username}/roadshow.git", "master")
     }
     steps {
         gradle('clean staticanalysis')
